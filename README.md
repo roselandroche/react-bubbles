@@ -28,21 +28,32 @@ In this project you will create a login page and request a token from the server
 
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
-- [ ] Explain what a token is used for.
-- [ ] What steps can you take in your web apps to keep your data secure?
-- [ ] Describe how web servers work.
-- [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+- [x] Explain what a token is used for.
+
+The token is used to show when a user has permission to access the protected data on a site/in an app. It shows the user is who they say they are, and acts like a metaphorical key.
+
+- [x] What steps can you take in your web apps to keep your data secure?
+
+We can use protected routes, which are only accessible with a token, and redirect away from these when there is no token. The use of a token is kind of implied, but that's a huge part of this as well. 
+
+- [x] Describe how web servers work.
+
+Web servers are just computers that hold code for websites. They are connected to each other, and requests starting with the user travel along the 'web' of servers until they find the right domain/'address', find the data in question, and pull it back to display to the user.
+
+- [x] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+
+Create = POST, PUT   Read = GET   Update = POST, PUT   Delete = DELETE
 
 
 ## Project Set Up
 
 Follow these steps to set up and work on your project:
 
-- [ ] Create a forked copy of this project.
-- [ ] Add PM as collaborator on Github.
-- [ ] Clone your OWN version of Repo (Not Lambda's by mistake!).
+- [x] Create a forked copy of this project.
+- [x] Add PM as collaborator on Github.
+- [x] Clone your OWN version of Repo (Not Lambda's by mistake!).
 - [ ] Create a new Branch on the clone: git checkout -b `<firstName-lastName>`.
-- [ ] Implement the project on this Branch, committing changes regularly.
+- [x] Implement the project on this Branch, committing changes regularly.
 - [ ] Push commits: git push origin `<firstName-lastName>`.
 - [ ] **RUN** `yarn install or npm install` at the root to retrieve all the dependencies for the node server. You will not need to create any react apps here nor will you need to install any other dependencies. You should have all you need in this repo.
 - [ ] **LOOK** at all the files you've been given for this project. One important file to note is `server.js`. This file contains an **API** that you are going to be interfacing with. Below is documentation on how to interact with the **API**.
