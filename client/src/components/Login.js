@@ -25,6 +25,7 @@ const Login = (props) => {
       .then(res => {
         localStorage.setItem('token', res.data.payload)
         console.log(`Signed In`)
+        props.history.push('/bubbles-page')
       })
       .catch(err => {
         console.log(err)
