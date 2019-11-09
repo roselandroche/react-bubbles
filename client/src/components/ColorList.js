@@ -25,7 +25,7 @@ const ColorList = ({ colors, updateColors }) => {
     api()
       .put(`/api/colors/${colorToEdit.hex}`, colorToEdit)
       .then(res => {
-        console.log(res)
+        // console.log(res)
         updateColors([
           ...colors,
           {color: res.data.color,
@@ -40,7 +40,7 @@ const ColorList = ({ colors, updateColors }) => {
 
   const deleteColor = (color, id) => {
     // make a delete request to delete this color
-    window.confirm('Are you sure?')
+    // window.confirm('Are you sure?')
     updateColors(colors.filter(color => color.code.hex !== id))
     const ghost = colors.find(color => color.code.hex === id)
     
@@ -64,6 +64,7 @@ const ColorList = ({ colors, updateColors }) => {
             <span>
               <span className="delete" onClick={e => {
                     e.stopPropagation();
+                    e.preventDefault();
                     deleteColor(color, color.code.hex)
                   }
                 }>
