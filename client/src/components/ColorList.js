@@ -38,8 +38,21 @@ const ColorList = ({ colors, updateColors }) => {
       })
   };
 
-  const deleteColor = color => {
+  const deleteColor = (color, id) => {
     // make a delete request to delete this color
+    window.confirm('Are you sure?')
+    updateColors(colors.filter(color => color.code.hex !== id))
+    const ghost = colors.find(color => color.code.hex === id)
+    
+    api()
+      .delete(`/api/colors/${ghost}`)
+      .then(res => {
+        console.log(`Delete successful`)
+      })
+      .catch(err => {
+        console.log(err)
+        updateColors([...colors, ghost])
+      })
   };
 
   return (
@@ -51,7 +64,7 @@ const ColorList = ({ colors, updateColors }) => {
             <span>
               <span className="delete" onClick={e => {
                     e.stopPropagation();
-                    deleteColor(color)
+                    deleteColor(color, color.code.hex)
                   }
                 }>
                   x
