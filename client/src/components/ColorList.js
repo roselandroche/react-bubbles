@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import api from '../utils/axiosWithAuth';
 
 const initialColor = {
@@ -10,6 +10,7 @@ const ColorList = ({ colors, updateColors }) => {
   // console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  // const [colorChanged, setColorChanged] = useState(false);
 
   const editColor = color => {
     setEditing(true);
@@ -32,6 +33,7 @@ const ColorList = ({ colors, updateColors }) => {
           code: res.data.code}
         ])
         setEditing(false)
+        // setColorChanged(true)
       })
       .catch(err => {
         console.log(err)
