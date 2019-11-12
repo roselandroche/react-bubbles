@@ -23,7 +23,7 @@ const ColorList = ({ colors, updateColors }) => {
     // think about where will you get the id from...
     // where is it saved right now?
     api()
-      .put(`/api/colors/${colorToEdit.hex}`, colorToEdit)
+      .put(`/api/colors/${colorToEdit.id}`, colorToEdit)
       .then(res => {
         // console.log(res)
         updateColors([
