@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+import api from '../utils/axiosWithAuth';
 
 const initialColor = {
   color: "",
@@ -7,24 +7,54 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
+  // console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  // const [colorChanged, setColorChanged] = useState(false);
 
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
+    // console.log(colorToEdit)
   };
 
   const saveEdit = e => {
     e.preventDefault();
     // Make a put request to save your updated color
     // think about where will you get the id from...
-    // where is is saved right now?
+    // where is it saved right now?
+    api()
+      .put(`/api/colors/${colorToEdit.id}`, colorToEdit)
+      .then(res => {
+        // console.log(res)
+        updateColors([
+          ...colors,
+          {color: res.data.color,
+          code: res.data.code}
+        ])
+        setEditing(false)
+        // setColorChanged(true)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   };
 
-  const deleteColor = color => {
+  const deleteColor = (color, id) => {
     // make a delete request to delete this color
+    // window.confirm('Are you sure?')
+    updateColors(colors.filter(color => color.code.hex !== id))
+    const ghost = colors.find(color => color.code.hex === id)
+    
+    api()
+      .delete(`/api/colors/${ghost}`)
+      .then(res => {
+        console.log(`Delete successful`)
+      })
+      .catch(err => {
+        console.log(err)
+        updateColors([...colors, ghost])
+      })
   };
 
   return (
@@ -36,7 +66,8 @@ const ColorList = ({ colors, updateColors }) => {
             <span>
               <span className="delete" onClick={e => {
                     e.stopPropagation();
-                    deleteColor(color)
+                    e.preventDefault();
+                    deleteColor(color, color.code.hex)
                   }
                 }>
                   x
